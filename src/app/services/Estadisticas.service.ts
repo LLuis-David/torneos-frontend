@@ -26,10 +26,14 @@ export interface Evento {
   providedIn: 'root'
 })
 export class EstadisticasService {
-  private readonly ALUMNOS_URL = 'http://localhost:8080/api/alumnos';
-  private readonly EVENTOS_URL  = 'http://localhost:8080/api/eventos';
+  private readonly baseUrl = window.location.hostname === 'localhost'
+    ? 'http://localhost:8080/api'
+    : 'https://torneos-backend.onrender.com/api';
 
-  constructor(private http: HttpClient) { }
+  private readonly ALUMNOS_URL = `${this.baseUrl}/alumnos`;
+  private readonly EVENTOS_URL = `${this.baseUrl}/eventos`;
+
+  constructor(private http: HttpClient) {}
 
   getAllAlumnos(): Observable<Alumno[]> {
     return this.http.get<Alumno[]>(this.ALUMNOS_URL);
@@ -39,3 +43,4 @@ export class EstadisticasService {
     return this.http.get<Evento[]>(this.EVENTOS_URL);
   }
 }
+
