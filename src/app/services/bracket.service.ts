@@ -25,7 +25,9 @@ export interface Partido {
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiUrl = 'http://localhost:8080/api/partidos';
+  private apiUrl = window.location.hostname === 'localhost'
+  ? 'http://localhost:8080/api/alumnos'
+  : 'https://torneos-backend.onrender.com/api/alumnos';
 
   constructor(private http: HttpClient) {}
 

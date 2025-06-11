@@ -20,9 +20,11 @@ export interface Partido {
 })
 export class PartidoService {
 
-  private apiUrl = 'http://localhost:8080/api/partidos'; // Ajusta si tu endpoint cambia
+  private apiUrl = window.location.hostname === 'localhost'
+  ? 'http://localhost:8080/api/alumnos'
+  : 'https://torneos-backend.onrender.com/api/alumnos';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<Partido[]> {
     return this.http.get<Partido[]>(this.apiUrl);

@@ -6,9 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080'; //Angular carga el proyecto por defecto en este puerto http://localhost:4200
-
-  constructor(private http: HttpClient) { }
+  private baseUrl = window.location.hostname === 'localhost'
+      ? 'http://localhost:8080/api/alumnos'
+      : 'https://torneos-backend.onrender.com/api/alumnos';
+  
+    constructor(private http: HttpClient) {}
 
   login(user: string, password: string): Observable<any> {
     const loginData = { user, password };

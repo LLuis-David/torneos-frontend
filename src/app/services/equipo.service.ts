@@ -20,9 +20,11 @@ export interface Equipo {
   providedIn: 'root',
 })
 export class EquipoService {
-  private readonly baseUrl = 'http://localhost:8080/api/equipos';
+  private readonly baseUrl = window.location.hostname === 'localhost'
+  ? 'http://localhost:8080/api/alumnos'
+  : 'https://torneos-backend.onrender.com/api/alumnos';
 
-  constructor(private http: HttpClient) {}
+constructor(private http: HttpClient) {}
 
   // Crear un equipo
   createEquipo(equipo: Equipo): Observable<Equipo> {
