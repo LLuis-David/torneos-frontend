@@ -21,8 +21,8 @@ export interface Equipo {
 })
 export class EquipoService {
   private readonly baseUrl = window.location.hostname === 'localhost'
-  ? 'http://localhost:8080/api/alumnos'
-  : 'https://torneos-backend.onrender.com/api/alumnos';
+  ? 'http://localhost:8080/api/equipos'
+  : 'https://torneos-backend.onrender.com/api/equipos';
 
 constructor(private http: HttpClient) {}
 

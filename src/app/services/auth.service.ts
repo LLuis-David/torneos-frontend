@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   private baseUrl = window.location.hostname === 'localhost'
-      ? 'http://localhost:8080/api/alumnos'
-      : 'https://torneos-backend.onrender.com/api/alumnos';
+      ? 'http://localhost:8080'
+      : 'https://torneos-backend.onrender.com';
   
     constructor(private http: HttpClient) {}
 
