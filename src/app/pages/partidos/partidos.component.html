@@ -1,0 +1,68 @@
+<div class="container mt-5">
+
+  <!-- Encabezado con logo -->
+  <div class="d-flex align-items-center mb-4">
+    <img src="assets/images/logo2.png" alt="Icono de evento" width="50" height="50" class="me-3 rounded shadow-sm">
+    <h2 class="mb-0 fw-bold">🏆 {{ nombreEvento || 'Bracket del Torneo' }}</h2>
+  </div>
+
+  <!-- Ganador del torneo -->
+  <div *ngIf="ganadorTorneo" class="alert alert-success shadow-sm rounded-pill px-4 py-2">
+    🎉 <strong>{{ ganadorTorneo }}</strong> ha ganado el torneo.
+  </div>
+
+  <!-- Botón para generar el bracket -->
+  <div class="mb-3">
+    <button *ngIf="!bracketGenerado" (click)="generarBracket()" class="btn btn-success px-4 py-2 rounded-pill shadow" [disabled]="generandoBracket">
+      <span *ngIf="generandoBracket" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+      {{ generandoBracket ? 'Generando...' : 'Generar Bracket' }}
+    </button>
+    <p *ngIf="mensaje" class="mt-2 text-muted">{{ mensaje }}</p>
+  </div>
+
+  <!-- Bracket visual -->
+  <div class="d-flex overflow-auto pb-4">
+    <div *ngFor="let ronda of getRondasKeys()" class="me-4">
+      <h5 class="text-center mb-3 text-success fw-semibold">Ronda {{ ronda }}</h5>
+
+      <div *ngFor="let partido of rondas[ronda]" class="card shadow-sm border-0 mb-4" style="min-width: 280px;">
+        <div class="card-body bg-light rounded">
+          <p class="mb-2"><strong> Local:</strong> {{ getNombreEquipo(partido.equipoLocalId) }}</p>
+          <p class="mb-2"><strong> Visitante:</strong> {{ getNombreEquipo(partido.equipoVisitanteId) }}</p>
+
+          <!-- Partido programado -->
+          <div *ngIf="partido.estado === 'Programado'">
+            <div class="d-flex gap-2 mb-2">
+              <input type="number" [(ngModel)]="partido.marcadorLocal" class="form-control" placeholder="Local" />
+              <input type="number" [(ngModel)]="partido.marcadorVisitante" class="form-control" placeholder="Visitante" />
+            </div>
+            <button class="btn btn-sm btn-success w-100" (click)="guardarResultado(partido)">Guardar resultado</button>
+          </div>
+
+          <!-- Partido finalizado -->
+          <div *ngIf="partido.estado === 'Finalizado'" class="mt-2">
+            <p class="mb-1"><strong>🏁 Marcador:</strong> {{ partido.marcadorLocal }} - {{ partido.marcadorVisitante }}</p>
+            <p class="mb-0"><strong>🥇 Ganador:</strong> {{ getNombreEquipo(partido.ganadorId ?? 0) }}</p>
+          </div>
+
+          <!-- Observaciones -->
+          <div *ngIf="partido.observaciones" class="mt-2">
+            <p class="text-muted small"><strong>📝 Obs:</strong> {{ partido.observaciones }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Botón para volver -->
+    <div class="position-fixed bottom-0 end-0 m-4">
+      <a routerLink="/home" class="btn btn-success">
+        ← Regresar
+      </a>
+    </div>
+
+</div>
+
+
+
+

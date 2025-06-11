@@ -1,0 +1,219 @@
+.dashboard-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+    box-sizing: border-box;
+  
+    .event-sections {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  
+    .published-section {
+      .section-title {
+        font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+        margin-bottom: 1rem;
+        color: #34495e;
+      }
+    }
+    
+    .status-tabs {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ecf0f1;
+      padding: 0 1rem;
+    
+      .tabs-container {
+        display: flex;    
+        gap: 0.5rem;
+      }
+    
+      .status-tab {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        transition: all 0.2s ease;
+    
+        &:hover {
+          color: #2B823D;
+        }
+    
+        &.active {
+          border-bottom: 3px solid #2B823D;
+          color: #2B823D;
+          font-weight: 600;
+        }
+      }
+    
+      .action-buttons {
+        flex-shrink: 0;
+        display: flex;
+        gap: 1rem;
+      }
+    }
+    
+    .boton-verde {
+      background-color: #388e3c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      cursor: pointer;
+    }
+    
+    .boton-verde:hover {
+      background-color: #2e7d32;
+    }
+    
+    .current-event {
+      position: relative;
+      padding: 1.5rem;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #2B823D;
+      max-width: 10000px;
+      margin: 1rem 0;
+    
+      .event-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+    
+      .event-main-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0 0 0.5rem 0;
+      }
+    
+      .event-subtitle {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #7f8c8d;
+        margin: 0;
+      }
+    
+      .event-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    
+        .tag {
+          background: #e8f4fc;
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          font-size: 0.85rem;
+          color: #3498db;
+          font-weight: 500;
+        }
+      }
+    
+      .dropdown {
+        position: relative;
+        display: inline-block;
+
+    
+        .dropdown-toggle {
+          background-color: #388e3c;
+          color: white;
+          padding: 0.5rem 1rem;
+          border: 1px solid #3498db;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 0.9rem;
+          transition: all 0.2s ease;
+    
+          &:hover {
+            background-color: #2e7d32;
+          }
+        }
+    
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          right: 0;
+          background-color: white;
+          min-width: 180px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          border-radius: 4px;
+          z-index: 10;
+          overflow: hidden;
+          border: 1px solid #e0e0e0;
+    
+          button {
+            color: #333;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            width: 100%;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+    
+            &:hover {
+              background-color: #f5f5f5;
+            }
+    
+            &:not(:last-child) {
+              border-bottom: 1px solid #f0f0f0;
+            }
+          }
+        }
+    
+        &:hover .dropdown-menu {
+          display: block;
+        }
+      }
+    }
+  
+    .divider {
+      height: 1px;
+      background: #ecf0f1;
+      margin: 1rem 0;
+    }
+  
+    .general-section {
+      .general-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+  
+      .section-subtitle {
+        font-size: clamp(1rem, 1.2vw, 1.1rem);
+        color: #34495e;
+        margin: 0;
+      }
+  
+    }
+  
+  
+    .event-options {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+
+    }
+  
+  }

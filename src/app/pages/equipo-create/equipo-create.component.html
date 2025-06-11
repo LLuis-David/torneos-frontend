@@ -1,0 +1,110 @@
+<div class="container mt-4">
+
+  <!-- FORMULARIO EQUIPO -->
+  <div class="d-flex align-items-center mb-3">
+    <img src="assets/images/logo2.png" alt="Equipo" width="40" height="40" class="me-2" />
+    <h3 class="m-0">Crear Equipo</h3>
+  </div>
+  <form #equipoForm="ngForm" (ngSubmit)="registrarEquipo()" novalidate>
+    <!-- Nombre -->
+    <div class="mb-3">
+      <label class="form-label">Nombre del Equipo</label>
+      <input
+        name="nombreEquipo"
+        [(ngModel)]="equipo.nombre"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <!-- Rama / Deporte -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Rama</label>
+        <select
+          name="rama"
+          [(ngModel)]="equipo.rama"
+          required
+          class="form-select"
+        >
+          <option value="" disabled>Selecciona...</option>
+          <option value="Femenil">Femenil</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Mixto">Mixto</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Deporte</label>
+        <select
+          name="deporte"
+          [(ngModel)]="equipo.deporte"
+          required
+          class="form-select"
+        >
+          <option value="" disabled>Selecciona...</option>
+          <option value="Futbol">Futbol</option>
+          <option value="Baloncesto">Baloncesto</option>
+          <option value="Voleibol">Voleibol</option>
+          <option value="Ajedrez">Ajedrez</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Agregar integrante -->
+    <div class="mb-3">
+      <label class="form-label">Agregar Integrante (No. de Cuenta)</label>
+      <div class="input-group">
+        <input
+          name="noCuentaIntegrante"
+          [(ngModel)]="noCuentaIntegrante"
+          placeholder="Ej. 12345678"
+          class="form-control"
+        />
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="agregarIntegrante()"
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    <!-- Lista de integrantes -->
+    <ul class="list-group mb-3">
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+        *ngFor="let i of equipo.integrantes; let idx = index"
+      >
+        {{ i.nombre }} ({{ i.noCuenta }})
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-danger"
+          (click)="equipo.integrantes.splice(idx, 1)"
+        >
+          &times;
+        </button>
+      </li>
+    </ul>
+
+    <!-- Botones -->
+    <div class="d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-secondary me-2"
+        (click)="onCancel()"
+      >
+        Regresar
+      </button>
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="equipoForm.invalid"
+      >
+        Guardar Equipo
+      </button>
+    </div>
+  </form>
+</div>
+
+

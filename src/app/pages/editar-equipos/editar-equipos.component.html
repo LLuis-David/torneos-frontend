@@ -1,0 +1,149 @@
+<div class="container mt-4">
+    <div class="d-flex align-items-center mb-4">
+        <img src="assets/images/logo2.png" alt="Icono Equipos" width="40" height="40" class="me-2">
+        <h2 class="mb-0">
+          Equipos Registrados <span *ngIf="nombreEvento">- {{ nombreEvento }}</span>
+        </h2>
+    </div>
+  
+    <div *ngIf="equipos && equipos.length > 0; else sinEquipos">
+      <div class="row">
+        <div *ngFor="let equipo of equipos" class="col-md-6 mb-4">
+            <div class="card shadow-sm border-success">
+            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">{{ equipo.nombre }}</h5>
+              <span class="badge bg-light text-dark">{{ equipo.deporte }} - {{ equipo.rama }}</span>
+            </div>
+  
+            <div class="card-body">
+              <p class="fw-bold mb-2">Integrantes:</p>
+              <ul class="list-group list-group-flush mb-3">
+                <li *ngFor="let integrante of equipo.integrantes" class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ integrante.nombre }} ({{ integrante.noCuenta }})
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-primary me-1"
+                            (click)="abrirModalEditarIntegrante(equipo, integrante)">
+                      <i class="bi bi-pencil-fill"></i> Editar
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger"
+                            (click)="eliminarIntegrante(equipo.id!, integrante.noCuenta)">
+                      <i class="bi bi-person-dash-fill"></i> Eliminar
+                    </button>
+                  </div>
+                </li>
+              </ul>
+  
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-sm btn-outline-primary" (click)="abrirModalEditarEquipo(equipo)">
+                  <i class="bi bi-pencil-square"></i> Editar equipo
+                </button>
+                <button class="btn btn-sm btn-outline-success" (click)="abrirModalAgregarIntegrante(equipo)">
+                  <i class="bi bi-person-plus-fill"></i> Agregar integrante
+                </button>
+                <button class="btn btn-sm btn-outline-danger ms-auto" (click)="darDeBajaEquipo(equipo.id!)">
+                  <i class="bi bi-trash"></i> Dar de baja al equipo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #sinEquipos>
+      <div class="alert alert-info text-center mt-4">
+        No hay equipos registrados para este evento.
+      </div>
+    </ng-template>
+</div>
+  
+<!-- Modal Editar Equipo -->
+<div class="modal fade" id="modalEditarEquipo" tabindex="-1" aria-labelledby="modalEditarEquipoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="guardarCambiosEquipo()" #formEditarEquipo="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarEquipoLabel">Editar equipo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input [(ngModel)]="equipoSeleccionado.nombre" name="nombre" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="rama" class="form-label">Rama</label>
+            <input [(ngModel)]="equipoSeleccionado.rama" name="rama" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="deporte" class="form-label">Deporte</label>
+            <input [(ngModel)]="equipoSeleccionado.deporte" name="deporte" class="form-control" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="formEditarEquipo.invalid">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  
+<!-- Modal Agregar Integrante -->
+<div class="modal fade" id="modalAgregarIntegrante" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">Agregar integrante</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="nombreIntegrante" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombreIntegrante" [(ngModel)]="nuevoIntegrante.nombre">
+        </div>
+        <div class="mb-3">
+          <label for="noCuentaIntegrante" class="form-label">Número de cuenta</label>
+          <input type="number" class="form-control" id="noCuentaIntegrante" [(ngModel)]="nuevoIntegrante.noCuenta">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-success" (click)="guardarIntegrante()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<!-- Modal Editar Integrante -->
+<div class="modal fade" id="modalEditarIntegrante" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Editar integrante</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" [(ngModel)]="integranteEditando.nombre">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Número de cuenta</label>
+          <input type="number" class="form-control" [(ngModel)]="integranteEditando.noCuenta">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" (click)="guardarCambiosIntegrante()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Botón Regresar (solo visible al final del contenido y un poco hacia la izquierda) -->
+<div class="text-end mt-4">
+    <a routerLink="/home" class="btn btn-success me-3">
+      <i class="bi bi-arrow-left-circle me-2"></i> ← Regresar
+    </a>
+  </div>

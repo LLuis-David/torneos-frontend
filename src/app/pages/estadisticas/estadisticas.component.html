@@ -1,0 +1,76 @@
+<!-- src/app/pages/estadisticas/estadisticas.component.html -->
+<div class="container mt-4">
+
+  <!-- Cabecera con logo -->
+  <div class="d-flex align-items-center mb-3">
+    <img src="assets/images/logo2.png" alt="Logo Estadísticas" width="40" height="40" class="me-2" />
+    <h3 class="m-0">Estadísticas</h3>
+  </div>
+
+  <!-- Botón Regresar -->
+  <button type="button" class="btn btn-secondary mb-4" routerLink="/home">
+    Regresar
+  </button>
+
+  <div class="row">
+    <!-- Pie: Sexo -->
+    <div class="col-md-4 mb-4">
+      <h5 class="text-center">Alumnos por Sexo (%)</h5>
+      <canvas baseChart
+        [data]="{
+          labels: ['Masculino', 'Femenino'],
+          datasets: [{
+            data: [porcentajeMasculino, porcentajeFemenino],
+            backgroundColor: ['#36A2EB', '#FF6384']
+          }]
+        }"
+        [options]="{ responsive: true, plugins: { legend: { position: 'bottom' } } }"
+        [type]="'pie'"
+        style="max-height: 300px;">
+      </canvas>
+    </div>
+
+    <!-- Bar: Semestres -->
+    <div class="col-md-4 mb-4">
+      <h5 class="text-center">Alumnos por Semestre</h5>
+      <canvas baseChart
+        [data]="{
+          labels: semestres,
+          datasets: [{
+            label: 'Alumnos',
+            data: cantidadesPorSemestre,
+            backgroundColor: '#4BC0C0'
+          }]
+        }"
+        [options]="{ responsive: true }"
+        [type]="'bar'"
+        style="max-height: 450px;">
+      </canvas>
+    </div>
+
+    <!-- Bar: Eventos por Deporte -->
+    <div class="col-md-4 mb-4">
+      <h5 class="text-center">Eventos por Deporte</h5>
+      <canvas baseChart
+        [data]="{
+          labels: deportes,
+          datasets: [{
+            label: 'Eventos',
+            data: eventosPorDeporte,
+            backgroundColor: '#FFCE56'
+          }]
+        }"
+        [options]="{ responsive: true }"
+        [type]="'bar'"
+        style="max-height: 450px;">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+  

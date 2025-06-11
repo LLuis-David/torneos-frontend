@@ -1,0 +1,44 @@
+/* Botón verde personalizado */
+.btn-custom-green {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+  }
+  
+  .btn-custom-green:hover {
+    background-color: #1b5e20;
+  }
+  
+  /* Pestañas personalizadas */
+  .custom-tabs .nav-link {
+    color: #2e7d32;
+    border-color: #c8e6c9;
+  }
+  
+  .custom-tabs .nav-link.active {
+    background-color: #c8e6c9;
+    color: #1b5e20;
+    border-color: #81c784 #81c784 transparent;
+  }
+  
+  /* Encabezados y títulos */
+  h2.text-success {
+    color: #0e0f0e !important;
+  }
+  
+  /* Dropdown personalizado (opcional) */
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+  }
+
+  /* Botón "Opciones" */
+  .btn-secondary {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #1b5e20;
+  }

@@ -1,0 +1,24 @@
+<div class="container mt-4">
+    <h2>Lista de Partidos</h2>
+    <table class="table table-bordered table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Equipo Local</th>
+          <th>Equipo Visitante</th>
+          <th>Marcador</th>
+          <th>Estado</th>
+          <th>Ronda</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let partido of partidos">
+          <td>{{ partido.equipoLocalId }}</td>
+          <td>{{ partido.equipoVisitanteId }}</td>
+          <td>{{ partido.marcadorLocal }} - {{ partido.marcadorVisitante }}</td>
+          <td>{{ partido.estado }}</td>
+          <td>{{ partido.ronda }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

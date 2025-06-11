@@ -1,0 +1,176 @@
+<div class="container mt-4">
+    <div class="d-flex align-items-center mb-3">
+        <img src="assets/images/logo2.png" alt="Ícono evento" width="40" height="40" class="me-2">
+        <h2 class="mb-0">Crear nuevo Evento</h2>
+    </div>
+    <form (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+      <!-- Nombre -->
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input name="nombre"
+               class="form-control"
+               [(ngModel)]="evento.nombre"
+               required>
+      </div>
+  
+      <!-- Tipo (rama y deporte) -->
+      <div class="row">
+        <div class="col mb-3">
+          <label class="form-label">Rama</label>
+          <select name="rama"
+                  class="form-select"
+                  [(ngModel)]="evento.tipo.rama" required>
+            <option value="" disabled>Selecciona...</option>
+            <option>Masculino</option>
+            <option>Femenino</option>
+            <option>Mixto</option>
+          </select>
+        </div>
+        <div class="col mb-3">
+          <label class="form-label">Deporte</label>
+          <input name="deporte"
+                 class="form-control"
+                 [(ngModel)]="evento.tipo.deporte"
+                 required>
+        </div>
+      </div>
+  
+      <!-- Inscripciones -->
+      <fieldset class="border p-3 mb-3">
+        <legend class="small">Periodo de Inscripción</legend>
+        <div class="row">
+          <div class="col mb-3">
+            <label class="form-label">Inicio</label>
+            <input name="inscripcionInicio"
+                   type="date"
+                   class="form-control"
+                   [(ngModel)]="evento.inscripciones.fechaInicio"
+                   required>
+          </div>
+          <div class="col mb-3">
+            <label class="form-label">Fin</label>
+            <input name="inscripcionFin"
+                   type="date"
+                   class="form-control"
+                   [(ngModel)]="evento.inscripciones.fechaFin"
+                   required>
+          </div>
+          <div class="col mb-3">
+            <label class="form-label">Hora Inicio</label>
+            <input name="inscripcionHoraInicio"
+                   type="time"
+                   class="form-control"
+                   [(ngModel)]="evento.inscripciones.horaInicio">
+          </div>
+          <div class="col mb-3">
+            <label class="form-label">Hora Fin</label>
+            <input name="inscripcionHoraFin"
+                   type="time"
+                   class="form-control"
+                   [(ngModel)]="evento.inscripciones.horaFin">
+          </div>
+        </div>
+      </fieldset>
+  
+      <!-- Fechas del evento -->
+      <fieldset class="border p-3 mb-3">
+        <legend class="small">Fechas del Evento</legend>
+        <div class="row">
+          <div class="col mb-3">
+            <label class="form-label">Fecha Inicio</label>
+            <input name="fechaInicio"
+                   type="date"
+                   class="form-control"
+                   [(ngModel)]="evento.fechaInicio">
+          </div>
+          <div class="col mb-3">
+            <label class="form-label">Fecha Fin</label>
+            <input name="fechaFin"
+                   type="date"
+                   class="form-control"
+                   [(ngModel)]="evento.fechaFin">
+          </div>
+          <div class="col mb-3">
+            <label class="form-label">Hora Inicio</label>
+            <input name="horaInicio"
+                   type="time"
+                   class="form-control"
+                   [(ngModel)]="evento.horaInicio">
+          </div>
+        </div>
+      </fieldset>
+  
+      <!-- Lugar -->
+      <fieldset class="border p-3 mb-3">
+        <legend class="small">Lugar</legend>
+        <div class="mb-3">
+          <label class="form-label">Nombre del lugar</label>
+          <input name="lugarNombre"
+                 class="form-control"
+                 [(ngModel)]="evento.lugar.nombre">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Dirección</label>
+          <input name="lugarDireccion"
+                 class="form-control"
+                 [(ngModel)]="evento.lugar.direccion">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Capacidad</label>
+          <input name="lugarCapacidad"
+                 type="number"
+                 class="form-control"
+                 [(ngModel)]="evento.lugar.capacidad">
+        </div>
+      </fieldset>
+  
+      <!-- Descripción -->
+      <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea name="descripcion"
+                  class="form-control"
+                  rows="3"
+                  [(ngModel)]="evento.descripcion"></textarea>
+      </div>
+  
+      <!-- Estatus -->
+      <div class="mb-3">
+        <label class="form-label">Estatus</label>
+        <select name="estatus"
+                class="form-select"
+                [(ngModel)]="evento.estatus">
+          <option *ngFor="let s of estatusOptions">{{ s }}</option>
+        </select>
+      </div>
+  
+      <!-- Contacto -->
+      <fieldset class="border p-3 mb-3">
+        <legend class="small">Contacto</legend>
+        <div class="row">
+          <div class="col mb-3">
+            <label class="form-label">Profesor</label>
+            <input name="contactoProfesor"
+                   class="form-control"
+                   [(ngModel)]="evento.contacto.profesor">
+          </div>
+          <div class="col mb-3">
+            <label class="form-label">Horarios</label>
+            <input name="contactoHorarios"
+                   class="form-control"
+                   [(ngModel)]="evento.contacto.horarios">
+          </div>
+        </div>
+      </fieldset>
+  
+      <!-- Botones -->
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-secondary me-2" (click)="router.navigate(['/home'])" type="button">
+          Cancelar
+        </button>
+        <button class="btn btn-success" type="submit" [disabled]="f.invalid">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+  

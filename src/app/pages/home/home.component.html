@@ -1,0 +1,135 @@
+<div class="container mt-4">
+
+    <!-- Encabezado con imagen -->
+    <div class="d-flex align-items-center mb-3">
+      <img src="assets/images/logo2.png" alt="Icono de evento" width="40" height="40" class="me-2">
+      <h2 class="mb-0 text-success">Gestión de eventos</h2>
+    </div>
+  
+    <!-- Botones: Estadísticas y Crear evento -->
+    <div class="d-flex justify-content-end mb-3 gap-2">
+      <button class="btn btn-custom-green" [routerLink]="['/estadisticas']">Estadísticas</button>
+      <button class="btn btn-custom-green" [routerLink]="['/eventos/nuevo']">Crear evento</button>
+    </div>
+  
+    <!-- Pestañas -->
+    <ul class="nav nav-tabs custom-tabs">
+      <li class="nav-item">
+        <a class="nav-link"
+           [class.active]="activeTab==='publicados'"
+           (click)="selectTab('publicados')">
+          Publicados
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+           [class.active]="activeTab==='finalizados'"
+           (click)="selectTab('finalizados')">
+          Finalizados
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+           [class.active]="activeTab==='encurso'"
+           (click)="selectTab('encurso')">
+          En curso
+        </a>
+      </li>
+    </ul>
+  
+    <!-- Tab content -->
+    <div [ngSwitch]="activeTab" class="mt-3">
+  
+      <!-- PUBLICADOS -->
+      <table *ngSwitchCase="'publicados'" class="table table-striped">
+        <thead>
+          <tr><th>Nombre</th><th>Estatus</th><th>Opciones</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of publicados">
+            <td>{{ e.nombre }}</td>
+            <td>{{ e.estatus }}</td>
+            <td>
+              <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                Opciones
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/alumnos/create']">Registrar Alumno</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" [routerLink]="['/equipo/create', e.mongoId]">Agregar equipo</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" [routerLink]="['/evento', e.mongoId]">Datos del evento</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/eventos', e.mongoId, 'editar-equipos']">
+                    Editar equipos
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/eventos', e.mongoId, 'partidos']">
+                    Partidos
+                  </a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- FINALIZADOS -->
+      <table *ngSwitchCase="'finalizados'" class="table table-striped">
+        <thead>
+          <tr><th>Nombre</th><th>Estatus</th><th>Opciones</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of finalizados">
+            <td>{{ e.nombre }}</td>
+            <td>{{ e.estatus }}</td>
+            <td>
+              <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                Opciones
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/evento', e.mongoId]">Datos del evento</a>
+                </li>
+                <li>
+                  <a class="dropdown-item">Partidos</a>
+                </li>
+            </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- EN CURSO -->
+      <table *ngSwitchCase="'encurso'" class="table table-striped">
+        <thead>
+          <tr><th>Nombre</th><th>Estatus</th><th>Opciones</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of enCurso">
+            <td>{{ e.nombre }}</td>
+            <td>{{ e.estatus }}</td>
+            <td>
+              <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                Opciones
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/evento', e.mongoId]">Datos del evento</a>
+              </li>
+                <li><a class="dropdown-item">Partidos</a></li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+  </div>
+  
+  

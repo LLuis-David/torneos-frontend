@@ -1,0 +1,35 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <div class="logo-container">
+      <img src="assets/images/logo2.png" alt="COBAEM" class="logo" />
+    </div>
+
+    <h2 class="title">Sistema de eventos deportivos</h2>
+    <h3 class="subtitle">Iniciar sesión</h3>
+
+    <!-- CAMBIO AQUÍ: ngSubmit en lugar de submit -->
+    <form (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <input matInput [(ngModel)]="username" name="username" placeholder="Inserta tu usuario" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [(ngModel)]="password" type="password" name="password" placeholder="Inserta tu contraseña" required>
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" class="full-width">Enviar</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+
+
+  

@@ -1,0 +1,151 @@
+
+<div class="dashboard-container">
+<app-header [title]="'Gestión de eventos'"></app-header>
+  <div class="event-sections">
+    <!-- Sección Publicados -->
+    <div class="published-section">
+      <div class="status-tabs">
+        <!-- Tabs a la izquierda -->
+        <div class="tabs-container">
+          <div class="status-tab" [class.active]="esActivo('publicados')" (click)="cambiarTab('publicados')">
+            Publicados
+          </div>
+          <div class="status-tab" [class.active]="esActivo('finalizados')" (click)="cambiarTab('finalizados')">
+            Finalizados
+          </div>
+          <div class="status-tab" [class.active]="esActivo('enCurso')" (click)="cambiarTab('enCurso')">
+            En curso
+          </div>
+        </div>
+    
+        <!-- Botón a la derecha -->
+        <div class="action-buttons">
+          <button class="boton-verde">Estadisticas</button>
+          <button class="boton-verde">Crear evento</button>
+        </div>
+      </div>
+    </div>
+    
+    
+
+
+    <!-- Contenido dinámico con ngSwitch -->
+    <div class="tab-content" [ngSwitch]="activeTab">
+      <!-- Publicados -->
+      <div *ngSwitchCase="'publicados'">
+        <!-- <div *ngFor="let proyecto of publicados" class="proyecto-item"> -->
+        <!-- <h3>Proyectos Publicados</h3> -->
+        <!-- <div class="current-event card">
+          <h2 class="event-title">Eventos Publicados</h2>
+          <h2 class="event-title">2025 Torneo primavera</h2>
+          <p class="event-description">Registro por el torneo de primavera 2025</p>
+          <div class="event-tags">
+            <span class="tag">2025 Torneo primavera</span>
+            <span class="tag">Femenil</span>
+            <span class="tag">Registro</span>
+          </div>
+        </div> -->
+        <!-- </div> -->
+        <div class="current-event card">
+          <div class="event-header">
+            <div>
+              <h1 class="event-main-title">2025 Torneo primavera</h1>
+              <h2 class="event-subtitle">Registro para el torneo de primavera 2025</h2>
+            </div>
+            <div class="dropdown">
+              <button class="dropdown-toggle">Opciones</button>
+              <div class="dropdown-menu">
+                <button >Agregar equipo</button>
+                <button>Datos del evento</button>
+                <button>Editar equipos</button>
+                <button>Partidos</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="event-tags">
+            <span class="tag">2025 Torneo primavera</span>
+            <span class="tag">Femenil</span>
+            <span class="tag">Registro</span>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Finalizados -->
+      <div *ngSwitchCase="'finalizados'">
+        <!-- <div *ngFor="let proyecto of finalizados" class="proyecto-item"> -->
+          <div class="current-event card">
+            <div class="event-header">
+              <div>
+                <h1 class="event-main-title">2025 Torneo primavera</h1>
+                <h2 class="event-subtitle">Registro para el torneo de primavera 2025</h2>
+              </div>
+              <div class="dropdown">
+                <button class="dropdown-toggle">Opciones</button>
+                <div class="dropdown-menu">
+                  <button >Agregar equipo</button>
+                  <button>Datos del evento</button>
+                  <button>Editar equipos</button>
+                  <button>Partidos</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="event-tags">
+              <span class="tag">2025 Torneo primavera</span>
+              <span class="tag">Femenil</span>
+              <span class="tag">Registro</span>
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+
+      <!-- En curso -->
+      <div *ngSwitchCase="'enCurso'">
+
+        <!-- <div *ngFor="let proyecto of enCurso" class="proyecto-item"> -->
+          <div class="current-event card">
+            <div class="event-header">
+              <div>
+                <h1 class="event-main-title">2025 Torneo primavera</h1>
+                <h2 class="event-subtitle">Registro para el torneo de primavera 2025</h2>
+              </div>
+              <div class="dropdown">
+                <button class="dropdown-toggle">Opciones</button>
+                <div class="dropdown-menu">
+                  <button >Agregar equipo</button>
+                  <button>Datos del evento</button>
+                  <button>Editar equipos</button>
+                  <button>Partidos</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="event-tags">
+              <span class="tag">2025 Torneo primavera</span>
+              <span class="tag">Femenil</span>
+              <span class="tag">Registro</span>
+            </div>
+          </div>
+
+        
+        <!-- </div> -->
+      </div>
+    </div>
+
+
+
+    <!-- Desplige de respuesta del backend -->
+    <div class="current-event card" *ngFor="let evento of eventos">
+      <h2 class="event-title">{{evento.nombre}}</h2>
+      <p class="event-description">{{evento.descripcion}}</p>
+      <div class="event-tags">
+        <span class="tag">Lugar: {{evento.lugar}}</span>
+        <span class="tag">{{evento.rama}}</span>
+        <span class="tag">Inscripciones {{evento.Finicio}} - {{evento.FFinal}}</span>
+      </div>
+    </div>
+  </div>
+</div>

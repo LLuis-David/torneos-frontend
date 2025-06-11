@@ -1,0 +1,110 @@
+<ng-template #cargando>
+  <p>Cargando información del evento...</p>
+</ng-template>
+
+<div *ngIf="evento as e; else cargando" class="container mt-4">
+
+    <!-- Encabezado con imagen -->
+    <div class="d-flex align-items-center mb-3">
+      <img src="assets/images/logo2.png" alt="Icono de evento" width="40" height="40" class="me-2">
+      <h2 class="mb-0 text-success">Datos del evento</h2>
+    </div>
+
+  <div class="card">
+    <div class="card-header bg-success text-white">
+      <h2 class="mb-0">{{ e.nombre }}</h2>
+    </div>
+    <div class="card-body">
+      <p><strong>Descripción:</strong> {{ e.descripcion }}</p>
+      <p>
+        <strong>Tipo:</strong>
+        {{ e.tipo.rama }} – {{ e.tipo.deporte }}
+      </p>
+      <p>
+        <strong>Fechas:</strong>
+        {{ e.fechaInicio | date:'mediumDate' }} – {{ e.fechaFin | date:'mediumDate' }}
+      </p>
+      <p><strong>Hora de inicio:</strong> {{ e.horaInicio }}</p>
+
+      <hr>
+
+      <h5>Lugar</h5>
+      <p>
+        {{ e.lugar.nombre }}<br>
+        {{ e.lugar.direccion }}<br>
+        <small>Capacidad: {{ e.lugar.capacidad }}</small>
+      </p>
+
+      <hr>
+
+      <h5>Contacto</h5>
+      <p>
+        {{ e.contacto.profesor }}<br>
+        <small>{{ e.contacto.horarios }}</small>
+      </p>
+
+      <hr>
+
+      <p>
+        <strong>Estatus:</strong>
+        <span class="badge"
+              [ngClass]="{
+                'bg-success': e.estatus==='Abierto',
+                'bg-primary': e.estatus==='En curso',
+                'bg-secondary': e.estatus==='Cerrado'
+              }">
+          {{ e.estatus }}
+        </span>
+      </p>
+
+      <hr>
+
+      <h5>Inscripciones</h5>
+      <p>
+        <strong>Desde:</strong>
+        {{ e.inscripciones.fechaInicio | date:'shortDate' }}
+        – {{ e.inscripciones.horaInicio }}
+      </p>
+      <p>
+        <strong>Hasta:</strong>
+        {{ e.inscripciones.fechaFin | date:'shortDate' }}
+        – {{ e.inscripciones.horaFin }}
+      </p>
+
+      <hr>
+
+      <h5>Equipos Inscritos</h5>
+      <div *ngIf="equipos.length > 0; else sinEquipos">
+        <ul class="list-group">
+          <li *ngFor="let eq of equipos" class="list-group-item">
+            <h6 class="mb-1">{{ eq.nombre }}</h6>
+            <small>{{ eq.rama }} / {{ eq.deporte }}</small>
+            <ul class="mt-2">
+              <li *ngFor="let i of eq.integrantes">
+                {{ i.nombre }} ({{ i.noCuenta }})
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <ng-template #sinEquipos>
+        <p>No hay equipos inscritos en este evento todavía.</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <img src="assets/images/logo2.png" alt="Icono de evento" width="40" height="40" class="me-2">
+    <div>
+      <!-- Botón Descargar PDF -->
+      <button class="btn btn-primary me-2" (click)="downloadPdf()">
+        📄 Descargar PDF
+      </button>
+      <!-- Botón Regresar -->
+      <button class="btn btn-secondary" [routerLink]="['/home']">
+        ← Regresar
+      </button>
+    </div>
+  </div>
+
+</div>
