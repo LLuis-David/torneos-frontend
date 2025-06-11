@@ -16,7 +16,9 @@ export interface Alumno {
 
 @Injectable({ providedIn: 'root' })
 export class AlumnoService {
-  private apiUrl = 'http://localhost:8080/api/alumnos';
+  private apiUrl = window.location.hostname === 'localhost'
+    ? 'http://localhost:8080/api/alumnos'
+    : 'https://torneos-backend.onrender.com/api/alumnos';
 
   constructor(private http: HttpClient) {}
 
