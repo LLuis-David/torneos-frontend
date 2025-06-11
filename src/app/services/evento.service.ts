@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GLOBAL } from './global';
 
 export interface Evento {
   mongoId?: string;
@@ -36,8 +35,11 @@ export interface Evento {
   providedIn: 'root'
 })
 export class EventoService {
-  /** Queda: http://localhost:8080/api/eventos */
-  private readonly baseUrl = GLOBAL.url + 'api/eventos';
+  /** URL dinámica para backend local o en producción */
+  private readonly baseUrl = window.location.hostname === 'localhost'
+    ? 'http://localhost:8080/api/eventos'
+    : 'https://torneos-backend.onrender.com/api/eventos';
+
   private readonly jsonHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
@@ -69,7 +71,6 @@ export class EventoService {
   getEventoPorId(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
-  
-
 }
+
 
