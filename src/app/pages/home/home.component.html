@@ -6,11 +6,18 @@
       <h2 class="mb-0 text-success">Gestión de eventos</h2>
     </div>
   
-    <!-- Botones: Estadísticas y Crear evento -->
-    <div class="d-flex justify-content-end mb-3 gap-2">
-      <button class="btn btn-custom-green" [routerLink]="['/estadisticas']">Estadísticas</button>
-      <button class="btn btn-custom-green" [routerLink]="['/eventos/nuevo']">Crear evento</button>
+    <!-- Botones: Estadísticas, Alumnos y Crear evento -->
+    <div class="d-flex justify-content-between mb-3 flex-wrap">
+      <!-- Botón a la izquierda -->
+      <button class="btn btn-custom-green mb-2" [routerLink]="['/eventos/nuevo']">Crear evento</button>
+
+      <!-- Botones a la derecha -->
+      <div class="d-flex gap-2 mb-2">
+        <button class="btn btn-custom-green" [routerLink]="['/estadisticas']">Estadísticas</button>
+        <button class="btn btn-custom-green" [routerLink]="['/gestor-alumnos']">Alumnos</button>
+      </div>
     </div>
+
   
     <!-- Pestañas -->
     <ul class="nav nav-tabs custom-tabs">

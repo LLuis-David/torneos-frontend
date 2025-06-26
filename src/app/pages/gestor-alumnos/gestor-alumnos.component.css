@@ -1,0 +1,8 @@
+.custom-green-table {
+  background-color: #e6f4ea; /* verde muy claro para filas alternadas */
+}
+
+.custom-green-header th {
+  background-color: #268b3e; /* un verde intenso tipo Bootstrap 4 */
+  color: white;
+}

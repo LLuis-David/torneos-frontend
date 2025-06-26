@@ -11,6 +11,7 @@ import { EditarEquiposComponent } from './pages/editar-equipos/editar-equipos.co
 import { PartidosComponent } from './pages/partidos/partidos.component';
 import { AlumnoCreateComponent } from './pages/alumno-create/alumno-create.component';
 import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
+import { GestorAlumnosComponent } from './pages/gestor-alumnos/gestor-alumnos.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'eventos/:eventoId/partidos', component: PartidosComponent },
   {path: 'alumnos/create', component: AlumnoCreateComponent},
   { path: 'estadisticas', component: EstadisticasComponent },
+  { path: 'gestor-alumnos', component: GestorAlumnosComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

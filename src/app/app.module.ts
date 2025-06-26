@@ -37,6 +37,7 @@ import { EstadisticasComponent } from './pages/estadisticas/estadisticas.compone
 
 //Estadisticas
 import { NgChartsModule } from 'ng2-charts';
+import { GestorAlumnosComponent } from './pages/gestor-alumnos/gestor-alumnos.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { NgChartsModule } from 'ng2-charts';
     PartidosComponent,
     AlumnoCreateComponent,
     EstadisticasComponent,
+    GestorAlumnosComponent,
   ],
   imports: [
     BrowserModule,

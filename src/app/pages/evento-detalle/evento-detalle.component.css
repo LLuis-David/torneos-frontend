@@ -1,15 +1,55 @@
-/* Botón Descargar */
-.btn-primary {
-    background-color: #2e7d32;
-    color: white;
-    border: none;
-  }
-  
-  .btn-primary:hover {
-    background-color: #1b5e20;
-  }
+.card {
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+}
 
-/* Encabezados y títulos */
-h2.text-success {
-    color: #0e0f0e !important;
+.card-header h4 {
+  font-size: 1.4rem;
+}
+
+h5, h6 {
+  font-weight: 600;
+}
+
+.accordion-button {
+  background-color: #f8f9fa;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #e0f2e9;
+  color: #198754;
+}
+
+.accordion-body {
+  background-color: #fdfdfd;
+  padding: 0.75rem 1rem;
+}
+
+.accordion-item {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  border: 1px solid #dee2e6;
+}
+
+.badge {
+  font-size: 0.95rem;
+  padding: 0.4em 0.6em;
+  border-radius: 0.5rem;
+}
+
+p {
+  margin-bottom: 0.4rem;
+}
+
+ul {
+  padding-left: 1.2rem;
+}
+
+ul li {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
 }

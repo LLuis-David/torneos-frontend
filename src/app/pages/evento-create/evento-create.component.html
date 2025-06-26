@@ -28,11 +28,18 @@
         </div>
         <div class="col mb-3">
           <label class="form-label">Deporte</label>
-          <input name="deporte"
-                 class="form-control"
-                 [(ngModel)]="evento.tipo.deporte"
-                 required>
+          <select name="deporte"
+                  class="form-select"
+                  [(ngModel)]="evento.tipo.deporte"
+                  required>
+            <option value="" disabled selected>Selecciona un deporte...</option>
+            <option>Fútbol</option>
+            <option>Voleibol</option>
+            <option>Ajedrez</option>
+            <option>Baloncesto</option>
+          </select>
         </div>
+
       </div>
   
       <!-- Inscripciones -->

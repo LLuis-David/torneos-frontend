@@ -1,0 +1,186 @@
+<div class="container mt-4 position-relative">
+
+  <!-- Cabecera con logo -->
+  <div class="d-flex align-items-center mb-3">
+    <img src="assets/images/logo2.png" alt="Logo Estadísticas" width="60" height="60" class="me-2" />
+    <h3 class="m-0">Alumnos</h3>
+  </div>
+
+  <!-- Botones alineados izquierda y derecha -->
+  <div class="d-flex justify-content-between mb-3 flex-wrap align-items-center">
+
+    <!-- Botón Regresar a la izquierda -->
+    <button 
+      class="btn btn-secondary mb-2" 
+      routerLink="/home">
+      Regresar
+    </button>
+
+    <!-- Botones Exportar PDF y Agregar Alumno a la derecha -->
+    <div class="d-flex gap-2 mb-2">
+      <button 
+        class="btn btn-outline-primary" 
+        (click)="generarReporte()">
+        Exportar PDF
+      </button>
+
+      <button 
+        class="btn btn-success" 
+        (click)="agregarAlumno()">
+        Agregar Alumno
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtros: búsqueda, semestre y sexo -->
+  <div class="d-flex gap-3 mb-3 flex-wrap">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Buscar por nombre o no. de cuenta..." 
+      [(ngModel)]="filtro" 
+      (input)="aplicarFiltro()" 
+      style="max-width: 400px;"
+    />
+
+    <select class="form-select" [(ngModel)]="filtroSemestre" (change)="aplicarFiltro()" style="max-width: 250px;">
+      <option value="">Todos los semestres</option>
+      <option *ngFor="let s of semestres" [value]="s">{{ s }}</option>
+    </select>
+
+    <select class="form-select" [(ngModel)]="filtroSexo" (change)="aplicarFiltro()" style="max-width: 250px;">
+      <option value="">Todos los sexos</option>
+      <option *ngFor="let sexo of sexos" [value]="sexo">{{ sexo }}</option>
+    </select>
+  </div>
+
+<table class="table table-bordered table-striped custom-green-table mt-1">
+  <thead class="custom-green-header">
+      <tr>
+        <th>#</th>
+        <th>No. de Cuenta</th>
+        <th>Nombre</th>
+        <th>Tel. de Emergencia</th>
+        <th>Semestre</th>
+        <th>Tipo de Sangre</th>
+        <th>No. Seguro Social</th>
+        <th>Sexo</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alumno of alumnosFiltrados; index as i">
+        <td>{{ i + 1 }}</td>
+
+        <!-- No. de Cuenta -->
+        <td *ngIf="!alumno.editando" [innerHTML]="resaltarTexto(alumno.noCuenta.toString())"></td>
+        <td *ngIf="alumno.editando">
+          <input 
+            type="number" 
+            [(ngModel)]="alumno.noCuenta" 
+            class="form-control form-control-sm" 
+            min="1"
+          />
+        </td>
+
+        <!-- Nombre -->
+        <td *ngIf="!alumno.editando" [innerHTML]="resaltarTexto(alumno.nombre)"></td>
+        <td *ngIf="alumno.editando">
+          <input type="text" [(ngModel)]="alumno.nombre" class="form-control form-control-sm" />
+        </td>
+
+        <!-- Tel. de Emergencia -->
+        <td *ngIf="!alumno.editando">{{ alumno.telEmergencia }}</td>
+        <td *ngIf="alumno.editando">
+          <input 
+            type="text" 
+            [(ngModel)]="alumno.telEmergencia" 
+            class="form-control form-control-sm" 
+            maxlength="10"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+          />
+        </td>
+
+        <!-- Semestre -->
+        <td *ngIf="!alumno.editando">{{ alumno.semestre }}</td>
+        <td *ngIf="alumno.editando">
+          <select [(ngModel)]="alumno.semestre" class="form-select form-select-sm">
+            <option [ngValue]="1">1</option>
+            <option [ngValue]="2">2</option>
+            <option [ngValue]="3">3</option>
+            <option [ngValue]="4">4</option>
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="6">6</option>
+          </select>
+        </td>
+
+        <!-- Tipo de Sangre -->
+        <td *ngIf="!alumno.editando">{{ alumno.tipoSangre }}</td>
+        <td *ngIf="alumno.editando">
+          <select [(ngModel)]="alumno.tipoSangre" class="form-select form-select-sm">
+            <option value="">Seleccione</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>
+        </td>
+
+        <!-- No. Seguro Social -->
+        <td *ngIf="!alumno.editando">{{ alumno.noSS }}</td>
+        <td *ngIf="alumno.editando">
+          <input 
+            type="text" 
+            [(ngModel)]="alumno.noSS" 
+            class="form-control form-control-sm" 
+            maxlength="11"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+          />
+        </td>
+
+        <!-- Sexo -->
+        <td *ngIf="!alumno.editando">{{ alumno.sexo }}</td>
+        <td *ngIf="alumno.editando">
+          <select [(ngModel)]="alumno.sexo" class="form-select form-select-sm">
+            <option value="">Seleccione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </td>
+
+        <!-- Acciones -->
+        <td>
+          <button *ngIf="!alumno.editando" class="btn btn-primary btn-sm me-1" (click)="iniciarEdicion(alumno)">Editar</button>
+          <button *ngIf="alumno.editando" class="btn btn-success btn-sm me-1" (click)="guardarCambios(alumno)">Guardar</button>
+          <button *ngIf="alumno.editando" class="btn btn-secondary btn-sm me-1" (click)="cancelarEdicion(alumno)">Cancelar</button>
+          <button 
+            *ngIf="!alumno.editando" 
+            class="btn btn-danger btn-sm" 
+            (click)="eliminarAlumno(alumno.id!)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="alumnosFiltrados.length === 0" class="alert alert-info text-center mt-4">
+    No hay alumnos que coincidan con la búsqueda o filtros seleccionados.
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
